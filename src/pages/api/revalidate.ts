@@ -7,7 +7,6 @@ type Data = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  console.log(req.query.data);
 
   if (req.query.token !== process.env.REVALIDATE_TOKEN) {
     return res.status(401).json({ revalidated: false, message: "Invalid token" });

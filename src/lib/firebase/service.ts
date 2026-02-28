@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import app from "./init";
 import bcrypt from "bcrypt";
 
@@ -68,5 +68,33 @@ export async function signIn(userData: { email: string }) {
     }
   } catch (error: any) {
     return null;
+  }
+}
+
+export async function signInWithGoogle(userData: any) {
+  try {
+    const { email } = userData;
+    const q = query(collection(firestore, "users"), where(" ", "==", email));
+    const snapshot = await getDocs(q);
+    const data: any = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    if (data.length > 0) {
+      userData.role = data[0].role;
+      await updateDoc(doc(firestore, "users", data[0].id), {
+        userData,
+      });
+      return { status: true, message: "Sign in with Google successfully", data: data[0] };
+    } else {
+      userData.role = "member";
+      await addDoc(collection(firestore, "users"), {
+        userData,
+      });
+      return { status: true, message: "Sign in with Google successfully", data: userData };
+    }
+  } catch (error: any) {
+    return { status: false, message: "Sign in with Google failed" };
   }
 }

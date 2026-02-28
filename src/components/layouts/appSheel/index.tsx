@@ -1,5 +1,15 @@
 import { useRouter } from "next/router";
-import Navbar from "../Navbar";
+import { Roboto } from "next/font/google";
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("../Navbar"), {
+  ssr: false,
+});
+
+export const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -12,7 +22,7 @@ const AppShell = (props: AppShellProps) => {
   const { pathname } = useRouter();
 
   return (
-    <div>
+    <div className={roboto.className}>
       {!disableNavbar.includes(pathname) && <Navbar />}
       {children}
     </div>

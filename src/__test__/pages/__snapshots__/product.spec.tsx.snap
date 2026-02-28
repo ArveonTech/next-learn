@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ProductPage renders product page 1`] = `
+<div>
+  <div>
+    <div
+      class="product"
+    >
+      <div
+        class="product__title"
+      >
+        Product
+      </div>
+      <div
+        class="product__content"
+      />
+    </div>
+  </div>
+</div>
+`;

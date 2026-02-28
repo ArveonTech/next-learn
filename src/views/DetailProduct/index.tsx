@@ -1,5 +1,6 @@
 import { ProductType } from "@/types/product.type";
 import styles from "@/views/DetailProduct/DetailProduct.module.scss";
+import Image from "next/image";
 
 const detailProduct = ({ product }: { product: ProductType }) => {
   return (
@@ -8,7 +9,7 @@ const detailProduct = ({ product }: { product: ProductType }) => {
       <div>
         <div className={styles.productDetail}>
           <div className={styles.productDetail__image}>
-            <img src={product.image && product.image} alt={product.name} className="h-50" />
+            <Image src={product.image && product.image} alt={product.name} className="h-50" width={200} height={200} />
           </div>
 
           <h4 className={styles.productDetail__name}>{product.name}</h4>

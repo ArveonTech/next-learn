@@ -22,7 +22,6 @@ const RegisterView = () => {
       body: JSON.stringify(data),
     });
     const result = await response.json();
-    console.info(result);
     if (result.status === 200) {
       setLoading(false);
       push("/auth/login");

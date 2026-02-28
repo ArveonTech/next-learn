@@ -10,7 +10,6 @@ type Data = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === "POST") {
     const response: any = await signUp(req.body);
-    console.info(response);
     if (response.status !== 200) {
       return res.status(response.status).json(response);
     }

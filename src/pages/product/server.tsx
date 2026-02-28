@@ -20,7 +20,6 @@ export const getServerSideProps = async () => {
 
   const response = await res.json();
 
-  console.info(response);
 
   return {
     props: {
